@@ -18,3 +18,12 @@ resource "aws_instance" "michi_ec2" {
     Name = "michi-ec2"
   }
 }
+
+resource "aws_eip" "michi_eip" {
+  domain = "vpc"
+}
+
+resource "aws_eip_association" "michi_eip_assoc" {
+  instance_id   = aws_instance.michi_ec2.id
+  allocation_id = aws_eip.michi_eip.id
+}
